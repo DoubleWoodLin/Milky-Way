@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+const allBlogs = await Astro.glob('../pages/blogs/*.md');
 const pageTitle = "Posts";
 ---
 <Layout pageTitle={pageTitle}>
@@ -9,32 +11,14 @@ const pageTitle = "Posts";
     </div>
     <h2>Blog</h2>
     <ul role="list" class="link-card-grid">
-        <Card
-            url="https://medium.com/"
-            image="/blog-post.webp"
-            title="Blog 1"
-            body="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci"
-        />
-        <Card
-            url="https://medium.com/"
-            image="/blog-post.webp"
-            title="Blog 2"
-            body="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci"
-        />
-        <Card
-            url="https://medium.com/"
-            image="/blog-post.webp"
-            title="Blog 3"
-            body="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci"
-        />
-        <Card
-            url="https://medium.com/"
-            image="/blog-post.webp"
-            title="Blog 4"
-            body="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci"
-        />
+        {allBlogs.map((card) => <Card 
+            url={card.url} 
+            image={card.frontmatter.image.url} 
+            title={card.frontmatter.title} 
+            body={card.frontmatter.description}
+        />)}
     </ul>
-    <h2>YouTube</h2>
+    <!-- <h2>YouTube</h2>
     <ul role="list" class="link-card-grid">
         <Card
             url="https://www.youtube.com/"
@@ -48,5 +32,5 @@ const pageTitle = "Posts";
             title="Video 2"
             body="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci"
         />
-    </ul>
+    </ul> -->
 </Layout>
